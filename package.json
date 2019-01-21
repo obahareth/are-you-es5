@@ -7,15 +7,13 @@
   "author": "Omar Bahareth <omar@omar.engineer>",
   "license": "MIT",
   "private": false,
-
   "dependencies": {
-
+    "es-check": "^5.0.0",
+    "read-package-json": "^2.0.13"
   },
-
   "devDependencies": {
     "prettier": "^1.16.0"
   },
-
   "scripts": {
     "format": "prettier --check \"src/**/*.js\" --write"
   }
