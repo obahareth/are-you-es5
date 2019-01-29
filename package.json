@@ -8,8 +8,7 @@
   "license": "MIT",
   "private": false,
   "dependencies": {
-    "es-check": "^5.0.0",
-    "read-package-json": "^2.0.13"
+    "es-check": "^5.0.0"
   },
   "devDependencies": {
     "prettier": "^1.16.0"
