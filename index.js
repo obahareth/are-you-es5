@@ -18,8 +18,7 @@ program
     }
 
     const checker = new ModulesChecker(path, config)
-    checker.checkModules();
+    checker.checkModules()
   })
-
 
 program.parse(process.argv)
