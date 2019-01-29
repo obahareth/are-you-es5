@@ -1,10 +1,17 @@
-const { exec } = require('child_process')
+const {
+  exec
+} = require('child_process')
 
 const path = require('path')
 
 class ModulesChecker {
-  constructor(dir, config = ModulesChecker.defaultConfig) {
-    this.config = config
+  constructor(dir, config) {
+    if (config && typeof (config) === 'object') {
+      this.config = config
+    } else {
+      this.config = ModulesChecker.defaultConfig
+    }
+
     this.dir = dir
   }
 

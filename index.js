@@ -9,7 +9,7 @@ program
   .description('Checks if all node_modules at <path> are ES5')
   .option('-a, --all', 'Log all messages (including modules that are ES5)')
   .action((path, cmd) => {
-    const config = ModulesChecker.defaultConfig
+    let config = null
 
     if (cmd.all) {
       config = {
