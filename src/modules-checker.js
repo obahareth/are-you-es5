@@ -1,7 +1,6 @@
-const { exec } = require('child_process')
-
-const path = require('path')
+const acorn = require('acorn')
 const fs = require('fs')
+const path = require('path')
 
 class ModulesChecker {
   constructor(dir, config) {
@@ -94,24 +93,24 @@ class ModulesChecker {
 
   checkScript(scriptPath, dependencyName) {
     // TODO: Check all scripts this script requires/imports
-    exec(`es-check es5 ${scriptPath}`, (error, stdout, stderr) => {
-      if (error) {
-        if (error.message.includes('ES version matching errors')) {
-          console.log(`❌ ${dependencyName} is not ES5`)
-        }
+    const acornOpts = {
+      ecmaVersion: '5',
+      silent: true
+    }
+    const code = fs.readFileSync(scriptPath, 'utf8')
 
-        // node couldn't execute the command
-        else {
-          console.error(error)
-        }
+    try {
+      acorn.parse(code, acornOpts)
+    } catch (err) {
+      console.log(`❌ ${dependencyName} is not ES5`)
+      return false
+    }
 
-        return
-      }
+    if (this.config.logEs5Packages) {
+      console.log(`✅ ${dependencyName} is ES5`)
+    }
 
-      if (this.config.logEs5Packages) {
-        console.log(`✅ ${dependencyName} is ES5`)
-      }
-    })
+    return true
   }
 }
 

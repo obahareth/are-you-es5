@@ -8,8 +8,8 @@
   "license": "MIT",
   "private": false,
   "dependencies": {
-    "commander": "^2.19.0",
-    "es-check": "^5.0.0"
+    "acorn": "^6.0.6",
+    "commander": "^2.19.0"
   },
   "devDependencies": {
     "prettier": "^1.16.0"
