@@ -1,6 +1,7 @@
 const { exec } = require('child_process')
 
 const path = require('path')
+const fs = require('fs')
 
 class ModulesChecker {
   constructor(dir, config) {
@@ -25,10 +26,13 @@ class ModulesChecker {
       const packagePath = path.join(nodeModulesDir, dependency)
       const packageJson = require(path.join(packagePath, 'package.json'))
 
-      if (packageJson.main) {
-        const mainScriptPath = path.join(packagePath, packageJson.main)
-
+      const mainScriptPath = this.getMainScriptPath(packageJson, packagePath)
+      if (mainScriptPath) {
         this.checkScript(mainScriptPath, dependency)
+      } else {
+        console.log(
+          `⚠️ ${dependency} was not checked because no entry script was found`
+        )
       }
     })
   }
@@ -43,6 +47,49 @@ class ModulesChecker {
     }
 
     return Object.keys(packageJson.dependencies)
+  }
+
+  getMainScriptPath(packageJson, dependencyPath) {
+    if (packageJson.main) {
+      const mainPath = path.join(dependencyPath, packageJson.main)
+
+      if (!fs.existsSync(mainPath)) {
+        // Some packages like uid have nonexistant paths in their main value
+        // and have an index.js that should be loaded instead, so we'll look
+        // for it if the main script doesn't exist
+
+        const indexScriptPath = path.join(dependencyPath, 'index.js')
+
+        if (fs.existsSync(indexScriptPath)) {
+          return indexScriptPath
+        }
+
+        return null
+      }
+
+      const mainStats = fs.lstatSync(mainPath)
+
+      if (mainStats.isFile()) {
+        return mainPath
+      }
+      if (mainStats.isDirectory()) {
+        const indexScriptPath = path.join(mainPath, 'index.js')
+
+        if (fs.existsSync(indexScriptPath)) {
+          return indexScriptPath
+        }
+
+        return null
+      }
+    } else {
+      const indexScriptPath = path.join(dependencyPath, 'index.js')
+
+      if (fs.existsSync(indexScriptPath)) {
+        return indexScriptPath
+      }
+    }
+
+    return null
   }
 
   checkScript(scriptPath, dependencyName) {
