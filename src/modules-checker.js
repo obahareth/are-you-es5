@@ -15,7 +15,7 @@ class ModulesChecker {
 
   checkModules() {
     const nodeModulesDir = path.join(this.dir, 'node_modules')
-    const dependencies = this.getDepsFromPackageJson()
+    const dependencies = this.getDepsFromRootPackageJson()
 
     if (!dependencies) {
       return
@@ -33,7 +33,7 @@ class ModulesChecker {
     })
   }
 
-  getDepsFromPackageJson() {
+  getDepsFromRootPackageJson() {
     const packageJsonPath = path.join(this.dir, 'package.json')
     const packageJson = require(packageJsonPath)
 
