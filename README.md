@@ -1,7 +1,9 @@
 # are-you-es5
 A package to help you find out which of your `node_modules` aren't ES5 so you can add them to your Webpack/Rollup/Parcel  transpilation steps. This is currently limited to checking the entrypoint scripts only, which might actually be enough of a check to determine if a package should be transpiled or not.
 
-## Instructions
+## Usage
+
+(Still a bit ugly because the package hasn't been published to npm yet)
 
 ```
 Usage: ./index.js check [options] <path>
@@ -38,3 +40,9 @@ Babel-loader exclude regex:
 
 * [#2](https://github.com/obahareth/are-you-es5/issues/2) - Also check against all scripts required by entrypoint script, this should work for all JS module types.
 * [#4](https://github.com/obahareth/are-you-es5/issues/4) - Publish to npm.
+
+## Credits
+
+- [acorn](https://github.com/acornjs/acorn) All the actual ES5 checking happens through acorn, this package wouldn't exist without it.
+- [es-check](https://github.com/dollarshaveclub/es-check) This whole package wouldn't have been possible if I hadn't come across es-check and learned from it.
+
