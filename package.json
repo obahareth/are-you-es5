@@ -7,6 +7,9 @@
   "author": "Omar Bahareth <omar@omar.engineer>",
   "license": "MIT",
   "private": false,
+  "bin": {
+    "are-you-es5" : "./index.js"
+  },
   "dependencies": {
     "acorn": "^6.0.6",
     "commander": "^2.19.0"
