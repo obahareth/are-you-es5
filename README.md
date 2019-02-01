@@ -1,14 +1,41 @@
 # are-you-es5
 ![](https://img.shields.io/npm/v/are-you-es5.svg?style=popout)
+![](https://img.shields.io/node/v/are-you-es5.svg?style=flat)
 
-A package to help you find out which of your `node_modules` aren't ES5 so you can add them to your Webpack/Rollup/Parcel  transpilation steps. This is currently [limited to checking the entrypoint scripts only](https://github.com/obahareth/are-you-es5/issues/2), which might actually be enough of a check to determine if a package should be transpiled or not.
+A package to help you find out which of your `node_modules` aren't written in ES5 so you can add them to your Webpack/Rollup/Parcel  transpilation steps. This is currently [limited to checking the entrypoint scripts only](https://github.com/obahareth/are-you-es5/issues/2), which **might** actually be enough of a check to determine if a package should be transpiled or not.
+
+## Installing
+
+You can install the package globally with 
+
+```bash
+npm install -g are-you-es5
+```
+
+or if you'd rather just run it immediately you can use npx:
+
+```bash
+npx are-you-es5 check /path/to/some/repo
+```
+
+### Aliasing
+If you've installed it globally and find it tiresome to type `are-you-es5` a lot, you can alias it to `es5`:
+
+#### Bash and Zsh
+
+```bash
+alias es5="are-you-es5"
+```
+
+#### Fish
+```fish
+alias es5 "are-you-es5"
+```
 
 ## Usage
 
-(Still a bit ugly because the package hasn't been published to npm yet)
-
 ```
-Usage: ./index.js check [options] <path>
+Usage: are-you-es5 check [options] <path>
 
 Checks if all node_modules at <path> are ES5
 
@@ -22,7 +49,7 @@ Options:
 ### Example
 
 ```bash
-./index.js check /path/to/some/repo -r
+are-you-es5 check /path/to/some/repo -r
 ❌ @babel/plugin-transform-block-scoping is not ES5
 ❌ @babel/plugin-transform-object-assign is not ES5
 ❌ @babel/plugin-transform-parameters is not ES5
@@ -41,7 +68,6 @@ Babel-loader exclude regex:
 ## TODO
 
 * [#2](https://github.com/obahareth/are-you-es5/issues/2) - Also check against all scripts required by entrypoint script, this should work for all JS module types.
-* [#4](https://github.com/obahareth/are-you-es5/issues/4) - Publish to npm.
 
 ## Credits
 
