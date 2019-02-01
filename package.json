@@ -1,6 +1,6 @@
 {
   "name": "are-you-es5",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A package to help you find out which of your `node_modules` aren't ES5 so you can add them to your transpilation steps.",
   "main": "index.js",
   "repository": "https://github.com/obahareth/are-you-es5.git",
@@ -20,6 +20,14 @@
   "engines": {
     "node" : ">=10.0"
   },
+  "keywords": [
+    "javascript",
+    "transpiling",
+    "bundling",
+    "es5",
+    "webpack",
+    "babel"
+  ],
   "scripts": {
     "format": "prettier --check index.js \"src/**/*.js\" --write"
   }
