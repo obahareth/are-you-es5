@@ -21,19 +21,26 @@ class ModulesChecker {
       return
     }
 
+    let nonEs5Dependencies = []
+
     dependencies.forEach(dependency => {
       const packagePath = path.join(nodeModulesDir, dependency)
       const packageJson = require(path.join(packagePath, 'package.json'))
 
       const mainScriptPath = this.getMainScriptPath(packageJson, packagePath)
       if (mainScriptPath) {
-        this.checkScript(mainScriptPath, dependency)
+        const dependencyIsEs5 = this.isScriptEs5(mainScriptPath, dependency)
+        if (!dependencyIsEs5) {
+          nonEs5Dependencies.push(dependency)
+        }
       } else {
         console.log(
           `⚠️ ${dependency} was not checked because no entry script was found`
         )
       }
     })
+
+    return nonEs5Dependencies
   }
 
   getDepsFromRootPackageJson() {
@@ -91,7 +98,7 @@ class ModulesChecker {
     return null
   }
 
-  checkScript(scriptPath, dependencyName) {
+  isScriptEs5(scriptPath, dependencyName) {
     // TODO: Check all scripts this script requires/imports
     const acornOpts = {
       ecmaVersion: '5',
