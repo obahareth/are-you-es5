@@ -43,6 +43,6 @@ Babel-loader exclude regex:
 
 ## Credits
 
-- [acorn](https://github.com/acornjs/acorn) All the actual ES5 checking happens through acorn, this package wouldn't exist without it.
-- [es-check](https://github.com/dollarshaveclub/es-check) This whole package wouldn't have been possible if I hadn't come across es-check and learned from it.
+- [acorn](https://github.com/acornjs/acorn) - All the actual ES5 checking happens through acorn, this package wouldn't exist without it.
+- [es-check](https://github.com/dollarshaveclub/es-check) - This whole package wouldn't have been possible if I hadn't come across es-check and learned from it.
 
