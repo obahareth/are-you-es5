@@ -14,7 +14,7 @@ export class ModulesChecker {
     private dir: string,
     private config: IModuleCheckerConfig = ModulesChecker.defaultConfig
   ) {
-    this.dir = dir
+    this.dir = path.resolve(dir)
     this.config = { ...ModulesChecker.defaultConfig, ...config }
   }
 
