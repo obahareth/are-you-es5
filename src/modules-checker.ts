@@ -65,7 +65,7 @@ export class ModulesChecker {
       const mainPath = path.join(dependencyPath, packageJson.main)
 
       if (!fs.existsSync(mainPath)) {
-        // Some packages like uid have nonexistant paths in their main value
+        // Some packages like uid have nonexistent paths in their main value
         // and have an index.js that should be loaded instead, so we'll look
         // for it if the main script doesn't exist
 
