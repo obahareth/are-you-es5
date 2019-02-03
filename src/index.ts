@@ -3,6 +3,7 @@
 import program from 'commander'
 import { getBabelLoaderIgnoreRegex } from './babel-loader-regex-builder'
 import { ModulesChecker } from './modules-checker'
+import IModuleCheckerConfig from './types/module-checker-config'
 
 program
   .version('0.1.0')

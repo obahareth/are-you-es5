@@ -1,6 +1,8 @@
 import * as acorn from 'acorn'
 import fs from 'fs'
 import path from 'path'
+
+import IModuleCheckerConfig from './types/module-checker-config'
 import { IPackageJSON } from './types/package-json'
 
 export class ModulesChecker {
