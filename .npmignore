@@ -1,4 +1,5 @@
 .prettierrc
 .gitignore
+.github
 node_modules
 yarn.lock
