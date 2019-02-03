@@ -1,24 +1,29 @@
 {
   "name": "are-you-es5",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "A package to help you find out which of your `node_modules` aren't ES5 so you can add them to your transpilation steps.",
-  "main": "index.js",
+  "main": "dist/index.js",
   "repository": "https://github.com/obahareth/are-you-es5.git",
   "author": "Omar Bahareth <omar@omar.engineer>",
   "license": "MIT",
   "private": false,
   "bin": {
-    "are-you-es5" : "./index.js"
+    "are-you-es5": "./index.js"
   },
   "dependencies": {
     "acorn": "^6.0.6",
     "commander": "^2.19.0"
   },
   "devDependencies": {
-    "prettier": "^1.16.0"
+    "@types/node": "^10.12.21",
+    "prettier": "^1.16.0",
+    "ts-node": "^8.0.2",
+    "tslint": "^5.12.1",
+    "tslint-config-prettier": "^1.17.0",
+    "typescript": "^3.3.1"
   },
   "engines": {
-    "node" : ">=10.0"
+    "node": ">=10.0"
   },
   "keywords": [
     "javascript",
@@ -29,6 +34,10 @@
     "babel"
   ],
   "scripts": {
-    "format": "prettier --check index.js \"src/**/*.js\" --write"
+    "build": "tsc",
+    "format": "prettier --check \"src/**/*.ts\" --write",
+    "lint": "tslint \"src/**/*.ts\"",
+    "lint:fix": "yarn format && yarn lint --fix",
+    "start": "yarn ts-node --files ./src/index.ts check $(pwd)"
   }
 }

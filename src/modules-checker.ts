@@ -1,19 +1,22 @@
-const acorn = require('acorn')
-const fs = require('fs')
-const path = require('path')
+import acorn from 'acorn'
+import fs from 'fs'
+import path from 'path'
+import { IPackageJSON } from './types/package-json'
 
-class ModulesChecker {
-  constructor(dir, config) {
-    if (config && typeof config === 'object') {
-      this.config = config
-    } else {
-      this.config = ModulesChecker.defaultConfig
-    }
-
-    this.dir = dir
+export class ModulesChecker {
+  private static defaultConfig = {
+    logEs5Packages: false
   }
 
-  checkModules() {
+  constructor(
+    private dir: string,
+    private config: IModuleCheckerConfig = ModulesChecker.defaultConfig
+  ) {
+    this.dir = dir
+    this.config = config
+  }
+
+  public checkModules(): string[] {
     const nodeModulesDir = path.join(this.dir, 'node_modules')
     const dependencies = this.getDepsFromRootPackageJson()
 
@@ -21,7 +24,7 @@ class ModulesChecker {
       return
     }
 
-    let nonEs5Dependencies = []
+    const nonEs5Dependencies: string[] = []
 
     dependencies.forEach(dependency => {
       const packagePath = path.join(nodeModulesDir, dependency)
@@ -43,7 +46,7 @@ class ModulesChecker {
     return nonEs5Dependencies
   }
 
-  getDepsFromRootPackageJson() {
+  public getDepsFromRootPackageJson() {
     const packageJsonPath = path.join(this.dir, 'package.json')
     const packageJson = require(packageJsonPath)
 
@@ -55,7 +58,7 @@ class ModulesChecker {
     return Object.keys(packageJson.dependencies)
   }
 
-  getMainScriptPath(packageJson, dependencyPath) {
+  public getMainScriptPath(packageJson: IPackageJSON, dependencyPath: string) {
     if (packageJson.main) {
       const mainPath = path.join(dependencyPath, packageJson.main)
 
@@ -98,12 +101,9 @@ class ModulesChecker {
     return null
   }
 
-  isScriptEs5(scriptPath, dependencyName) {
+  public isScriptEs5(scriptPath: string, dependencyName: string) {
     // TODO: Check all scripts this script requires/imports
-    const acornOpts = {
-      ecmaVersion: '5',
-      silent: true
-    }
+    const acornOpts: acorn.Options = { ecmaVersion: 5 }
     const code = fs.readFileSync(scriptPath, 'utf8')
 
     try {
@@ -120,9 +120,3 @@ class ModulesChecker {
     return true
   }
 }
-
-ModulesChecker.defaultConfig = {
-  logEs5Packages: false
-}
-
-module.exports = ModulesChecker

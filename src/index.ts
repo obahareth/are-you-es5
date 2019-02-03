@@ -1,10 +1,8 @@
 #!/usr/bin/env node
 
-const program = require('commander')
-const ModulesChecker = require('./src/modules-checker')
-const {
-  getBabelLoaderIgnoreRegex
-} = require('./src/babel-loader-regex-builder')
+import program from 'commander'
+import { getBabelLoaderIgnoreRegex } from './babel-loader-regex-builder'
+import { ModulesChecker } from './modules-checker'
 
 program
   .version('0.1.0')
