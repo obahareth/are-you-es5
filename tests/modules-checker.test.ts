@@ -206,8 +206,7 @@ describe('checkModules', () => {
 
     const mockIsScriptEs5 = (ModulesChecker.prototype.isScriptEs5 = jest
       .fn()
-      .mockImplementationOnce(() => true))
-      .mockImplementationOnce(() => false)
+      .mockImplementationOnce(() => true)).mockImplementationOnce(() => false)
 
     expect(modulesChecker.checkModules()).toEqual(['commander'])
   })
