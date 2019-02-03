@@ -40,10 +40,11 @@
   ],
   "scripts": {
     "build": "tsc",
-    "format": "prettier --check --write \"{src,tests}/**/*.ts\"",
+    "format": "yarn prettier:check --write",
     "lint": "tslint \"src/**/*.ts\"",
     "lint:fix": "yarn format && yarn lint --fix",
     "prepublish": "yarn build",
+    "prettier:check": "prettier --check \"{src,tests}/**/*.ts\"",
     "start": "yarn ts-node --files ./src/index.ts check $(pwd)",
     "test": "yarn jest"
   }
