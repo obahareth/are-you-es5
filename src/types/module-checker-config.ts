@@ -1,3 +1,3 @@
 interface IModuleCheckerConfig {
-  logEs5Packages: boolean
+  logEs5Packages?: boolean
 }
