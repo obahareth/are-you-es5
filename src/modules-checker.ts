@@ -4,7 +4,7 @@ import path from 'path'
 import { IPackageJSON } from './types/package-json'
 
 export class ModulesChecker {
-  private static defaultConfig = {
+  private static defaultConfig: IModuleCheckerConfig = {
     logEs5Packages: false
   }
 
@@ -13,7 +13,7 @@ export class ModulesChecker {
     private config: IModuleCheckerConfig = ModulesChecker.defaultConfig
   ) {
     this.dir = dir
-    this.config = config
+    this.config = { ...ModulesChecker.defaultConfig, ...config }
   }
 
   public checkModules(): string[] {

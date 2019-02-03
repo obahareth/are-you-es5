@@ -14,7 +14,7 @@ program
     'Get babel-loader exclude regex to ignore all node_modules except non-ES5 ones'
   )
   .action((path: string, cmd: any) => {
-    let config = null
+    let config: IModuleCheckerConfig = {}
 
     if (cmd.all) {
       config = {
