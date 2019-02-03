@@ -38,6 +38,7 @@
     "format": "prettier --check \"src/**/*.ts\" --write",
     "lint": "tslint \"src/**/*.ts\"",
     "lint:fix": "yarn format && yarn lint --fix",
+    "prepublish": "yarn build",
     "start": "yarn ts-node --files ./src/index.ts check $(pwd)"
   }
 }
