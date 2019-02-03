@@ -15,8 +15,13 @@
     "commander": "^2.19.0"
   },
   "devDependencies": {
+    "@types/jest": "^23.3.13",
+    "@types/mock-fs": "^3.6.30",
     "@types/node": "^10.12.21",
+    "jest": "^24.0.0",
+    "mock-fs": "^4.7.0",
     "prettier": "^1.16.0",
+    "ts-jest": "^23.10.5",
     "ts-node": "^8.0.2",
     "tslint": "^5.12.1",
     "tslint-config-prettier": "^1.17.0",
@@ -35,10 +40,11 @@
   ],
   "scripts": {
     "build": "tsc",
-    "format": "prettier --check \"src/**/*.ts\" --write",
+    "format": "prettier --check --write \"{src,tests}/**/*.ts\"",
     "lint": "tslint \"src/**/*.ts\"",
     "lint:fix": "yarn format && yarn lint --fix",
     "prepublish": "yarn build",
-    "start": "yarn ts-node --files ./src/index.ts check $(pwd)"
+    "start": "yarn ts-node --files ./src/index.ts check $(pwd)",
+    "test": "yarn jest"
   }
 }

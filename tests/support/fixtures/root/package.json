@@ -1,0 +1,13 @@
+{
+  "name": "are-you-es5-root-test",
+  "version": "1.0.7",
+  "description": "A package to help you find out which of your `node_modules` aren't ES5 so you can add them to your transpilation steps.",
+  "repository": "https://github.com/obahareth/are-you-es5.git",
+  "author": "Omar Bahareth <omar@omar.engineer>",
+  "license": "MIT",
+  "private": false,
+  "dependencies": {
+    "acorn": "^6.0.6",
+    "commander": "^2.19.0"
+  }
+}

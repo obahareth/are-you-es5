@@ -6,13 +6,13 @@ import IModuleCheckerConfig from './types/module-checker-config'
 import { IPackageJSON } from './types/package-json'
 
 export class ModulesChecker {
-  private static defaultConfig: IModuleCheckerConfig = {
+  public static readonly defaultConfig: IModuleCheckerConfig = {
     logEs5Packages: false
   }
 
   constructor(
-    private dir: string,
-    private config: IModuleCheckerConfig = ModulesChecker.defaultConfig
+    readonly dir: string,
+    readonly config: IModuleCheckerConfig = ModulesChecker.defaultConfig
   ) {
     this.dir = path.resolve(dir)
     this.config = { ...ModulesChecker.defaultConfig, ...config }
