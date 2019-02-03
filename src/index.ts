@@ -13,7 +13,7 @@ program
     '-r, --regex',
     'Get babel-loader exclude regex to ignore all node_modules except non-ES5 ones'
   )
-  .action((path, cmd) => {
+  .action((path: string, cmd: any) => {
     let config = null
 
     if (cmd.all) {
