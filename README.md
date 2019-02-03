@@ -1,6 +1,7 @@
 # are-you-es5
+![](https://img.shields.io/circleci/project/github/obahareth/are-you-es5/master.svg?style=popout)
 ![](https://img.shields.io/npm/v/are-you-es5.svg?style=popout)
-![](https://img.shields.io/node/v/are-you-es5.svg?style=flat)
+![](https://img.shields.io/node/v/are-you-es5.svg?style=popout)
 
 A package to help you find out which of your `node_modules` aren't written in ES5 so you can add them to your Webpack/Rollup/Parcel  transpilation steps. This is currently [limited to checking the entrypoint scripts only](https://github.com/obahareth/are-you-es5/issues/2), which **might** actually be enough of a check to determine if a package should be transpiled or not.
 
