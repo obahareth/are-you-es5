@@ -23,7 +23,7 @@ export class ModulesChecker {
     const dependencies = this.getDepsFromRootPackageJson()
 
     if (!dependencies) {
-      return
+      return []
     }
 
     const nonEs5Dependencies: string[] = []
