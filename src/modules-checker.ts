@@ -62,36 +62,7 @@ export class ModulesChecker {
 
   public getMainScriptPath(packageJson: IPackageJSON, dependencyPath: string) {
     if (packageJson.main) {
-      const mainPath = path.join(dependencyPath, packageJson.main)
-
-      if (!fs.existsSync(mainPath)) {
-        // Some packages like uid have nonexistent paths in their main value
-        // and have an index.js that should be loaded instead, so we'll look
-        // for it if the main script doesn't exist
-
-        const indexScriptPath = path.join(dependencyPath, 'index.js')
-
-        if (fs.existsSync(indexScriptPath)) {
-          return indexScriptPath
-        }
-
-        return null
-      }
-
-      const mainStats = fs.lstatSync(mainPath)
-
-      if (mainStats.isFile()) {
-        return mainPath
-      }
-      if (mainStats.isDirectory()) {
-        const indexScriptPath = path.join(mainPath, 'index.js')
-
-        if (fs.existsSync(indexScriptPath)) {
-          return indexScriptPath
-        }
-
-        return null
-      }
+      return this.getMainScriptFromPackageJson(packageJson, dependencyPath)
     } else {
       const indexScriptPath = path.join(dependencyPath, 'index.js')
 
@@ -120,5 +91,42 @@ export class ModulesChecker {
     }
 
     return true
+  }
+
+  private getMainScriptFromPackageJson(
+    packageJson: IPackageJSON,
+    dependencyPath: string
+  ) {
+    const mainPath = path.join(dependencyPath, packageJson.main)
+
+    if (!fs.existsSync(mainPath)) {
+      // Some packages like uid have nonexistent paths in their main value
+      // and have an index.js that should be loaded instead, so we'll look
+      // for it if the main script doesn't exist
+      const indexScriptPath = path.join(dependencyPath, 'index.js')
+
+      if (fs.existsSync(indexScriptPath)) {
+        return indexScriptPath
+      }
+
+      return null
+    }
+
+    const mainStats = fs.lstatSync(mainPath)
+
+    if (mainStats.isFile()) {
+      return mainPath
+    }
+
+    // If it's a directory, return dir/index.js if it exists
+    if (mainStats.isDirectory()) {
+      const indexScriptPath = path.join(mainPath, 'index.js')
+
+      if (fs.existsSync(indexScriptPath)) {
+        return indexScriptPath
+      }
+    }
+
+    return null
   }
 }
