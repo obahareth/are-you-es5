@@ -29,18 +29,22 @@ If you've installed it globally and find it tiresome to type `are-you-es5` a lot
 alias es5="are-you-es5"
 ```
 
+# Upgrading from 1.1
+
+If you were on version 1.1, the `-a` or `-all` option used to be for logging all messages, this has now changed to `-v` or `--verbose` and `-a` and `-all` are now used as a flag to check all node modules.
+
 ## Usage
 
 ```
 Usage: are-you-es5 check [options] <path>
 
-Checks if all node_modules at <path> are ES5
+Checks if all node_modules (direct dependencies only) at <path> are ES5
 
 Options:
-  -a, --all    Log all messages (including modules that are ES5)
-  -r, --regex  Get babel-loader exclude regex to ignore all node_modules except non-ES5 ones
-  -h, --help   output usage information
-
+  -a, --all      Check all node_modules instead of just direct dependencies
+  -v, --verbose  Log all messages (including modules that are ES5)
+  -r, --regex    Get babel-loader exclude regex to ignore all node_modules except non-ES5 ones
+  -h, --help     output usage information
 ```
 
 ### Example
