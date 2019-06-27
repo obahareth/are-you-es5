@@ -9,7 +9,7 @@ program
   .version('0.1.0')
   .command('check <path>')
   .description('Checks if all node_modules at <path> are ES5')
-  .option('-a, --all', 'Log all messages (including modules that are ES5)')
+  .option('-v, --verbose', 'Log all messages (including modules that are ES5)')
   .option(
     '-r, --regex',
     'Get babel-loader exclude regex to ignore all node_modules except non-ES5 ones'
@@ -17,7 +17,7 @@ program
   .action((path: string, cmd: any) => {
     let config: IModuleCheckerConfig = {}
 
-    if (cmd.all) {
+    if (cmd.verbose) {
       config = {
         logEs5Packages: true
       }
