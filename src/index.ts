@@ -6,7 +6,7 @@ import { ModulesChecker } from './modules-checker'
 import IModuleCheckerConfig from './types/module-checker-config'
 
 program
-  .version('0.1.0')
+  .version('1.2.0')
   .command('check <path>')
   .description(
     'Checks if all node_modules (direct dependencies only) at <path> are ES5'
