@@ -1,4 +1,5 @@
 import * as acorn from 'acorn'
+import flatten from 'array-flatten'
 import fs, { lstatSync } from 'fs'
 import path from 'path'
 
@@ -154,7 +155,7 @@ export class ModulesChecker {
           .filter(isDirectory)
       }
 
-      const nodeModules = getDirectories(nodeModulesPath)
+      let nodeModules = getDirectories(nodeModulesPath)
         .filter(entry => !entry.endsWith('.bin'))
         .map(entry => {
           // If this is a scope (folder starts with @), return all
@@ -165,12 +166,11 @@ export class ModulesChecker {
             return entry
           }
         })
-        .flat()
 
         // Remove path from all strings
         // e.g. turn bla/bla/node_modules/@babel/core
         // into @babel/core
-        .map((entry: string) => {
+        nodeModules = flatten(nodeModules).map((entry: string) => {
           const needle = 'node_modules/'
           const indexOfLastSlash = entry.lastIndexOf(needle)
           return entry.substr(indexOfLastSlash + needle.length)

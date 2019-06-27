@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 
 import program from 'commander'
-import 'ts-polyfill/lib/es2019-array';
 
 import { getBabelLoaderIgnoreRegex } from './babel-loader-regex-builder'
 import { ModulesChecker } from './modules-checker'
