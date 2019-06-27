@@ -25,15 +25,8 @@ npx are-you-es5 check /path/to/some/repo
 ### Aliasing
 If you've installed it globally and find it tiresome to type `are-you-es5` a lot, you can alias it to `es5`:
 
-#### Bash and Zsh
-
 ```bash
 alias es5="are-you-es5"
-```
-
-#### Fish
-```fish
-alias es5 "are-you-es5"
 ```
 
 ## Usage
