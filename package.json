@@ -12,7 +12,8 @@
   },
   "dependencies": {
     "acorn": "^6.0.6",
-    "commander": "^2.19.0"
+    "commander": "^2.19.0",
+    "ts-polyfill": "^3.5.1"
   },
   "devDependencies": {
     "@types/jest": "^23.3.13",
