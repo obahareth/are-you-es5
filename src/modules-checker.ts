@@ -167,14 +167,14 @@ export class ModulesChecker {
           }
         })
 
-        // Remove path from all strings
-        // e.g. turn bla/bla/node_modules/@babel/core
-        // into @babel/core
-        nodeModules = flatten(nodeModules).map((entry: string) => {
-          const needle = 'node_modules/'
-          const indexOfLastSlash = entry.lastIndexOf(needle)
-          return entry.substr(indexOfLastSlash + needle.length)
-        })
+      // Remove path from all strings
+      // e.g. turn bla/bla/node_modules/@babel/core
+      // into @babel/core
+      nodeModules = flatten(nodeModules).map((entry: string) => {
+        const needle = 'node_modules/'
+        const indexOfLastSlash = entry.lastIndexOf(needle)
+        return entry.substr(indexOfLastSlash + needle.length)
+      })
 
       return nodeModules
     }
