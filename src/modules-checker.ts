@@ -1,5 +1,5 @@
 import * as acorn from 'acorn'
-import fs from 'fs'
+import fs, { lstatSync } from 'fs'
 import path from 'path'
 
 import IModuleCheckerConfig from './types/module-checker-config'
@@ -20,7 +20,7 @@ export class ModulesChecker {
 
   public checkModules(): string[] {
     const nodeModulesDir = path.join(this.dir, 'node_modules')
-    const dependencies = this.getDepsFromRootPackageJson()
+    const dependencies = this.getDeps()
 
     if (!dependencies) {
       return []
@@ -48,16 +48,14 @@ export class ModulesChecker {
     return nonEs5Dependencies
   }
 
-  public getDepsFromRootPackageJson() {
-    const packageJsonPath = path.join(this.dir, 'package.json')
-    const packageJson = require(packageJsonPath)
-
-    if (!packageJson) {
-      console.error(`Failed to load package.json in ${this.dir}`)
-      return null
+  public getDeps(): string[] | null {
+    if (!this.config.checkAllNodeModules) {
+      return this.getDepsFromRootPackageJson()
+    } else {
+      return this.getAllNodeModules()
     }
 
-    return Object.keys(packageJson.dependencies)
+    return null
   }
 
   public getMainScriptPath(packageJson: IPackageJSON, dependencyPath: string) {
@@ -127,6 +125,61 @@ export class ModulesChecker {
       }
     }
 
+    return null
+  }
+
+  private getDepsFromRootPackageJson() {
+    const packageJsonPath = path.join(this.dir, 'package.json')
+    const packageJson = require(packageJsonPath)
+
+    if (!packageJson) {
+      console.error(`Failed to load package.json in ${this.dir}`)
+      return null
+    }
+
+    return Object.keys(packageJson.dependencies)
+  }
+
+  private getAllNodeModules(): string[] | null {
+    const nodeModulesPath = path.join(this.dir, 'node_modules')
+
+    if (fs.existsSync(nodeModulesPath)) {
+      const isDirectory = (source: string): boolean =>
+        lstatSync(source).isDirectory()
+
+      const getDirectories = (source: string): any[] => {
+        return fs
+          .readdirSync(source)
+          .map(name => path.join(source, name))
+          .filter(isDirectory)
+      }
+
+      const nodeModules = getDirectories(nodeModulesPath)
+        .filter(entry => !entry.endsWith('.bin'))
+        .map(entry => {
+          // If this is a scope (folder starts with @), return all
+          // folders inside it (scoped packages)
+          if (/@.*$/.test(entry)) {
+            return getDirectories(entry)
+          } else {
+            return entry
+          }
+        })
+        .flat()
+
+        // Remove path from all strings
+        // e.g. turn bla/bla/node_modules/@babel/core
+        // into @babel/core
+        .map((entry: string) => {
+          const needle = 'node_modules/'
+          const indexOfLastSlash = entry.lastIndexOf(needle)
+          return entry.substr(indexOfLastSlash + needle.length)
+        })
+
+      return nodeModules
+    }
+
+    console.error(`Failed to find node_modules at ${this.dir}`)
     return null
   }
 }

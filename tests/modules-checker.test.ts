@@ -40,14 +40,34 @@ describe('constructor', () => {
   })
 })
 
-describe('getDepsFromRootPackageJson', () => {
-  it('parses dependencies correctly', () => {
-    const deps = ['acorn', 'commander']
+describe('getDeps', () => {
+  it('returns direct dependencies from package.json', () => {
+    const deps = ['acorn', 'commander', 'is-even']
     const modulesChecker = new ModulesChecker(
       path.join(__dirname, '/support/fixtures/root')
     )
 
-    const parsedDeps = modulesChecker.getDepsFromRootPackageJson()
+    const parsedDeps = modulesChecker.getDeps()
+
+    expect(parsedDeps).toEqual(deps)
+  })
+
+  it('returns all node_modules when option is passed', () => {
+    const deps = [
+      'acorn',
+      'commander',
+      'is-buffer',
+      'is-even',
+      'is-number',
+      'is-odd',
+      'kind-of'
+    ]
+    const modulesChecker = new ModulesChecker(
+      path.join(__dirname, '/support/fixtures/root'),
+      { checkAllNodeModules: true }
+    )
+
+    const parsedDeps = modulesChecker.getDeps()
 
     expect(parsedDeps).toEqual(deps)
   })
@@ -177,7 +197,7 @@ describe('checkModules', () => {
   )
 
   const mockGetDepsFromRootPackageJson = (dependencies: any[]) => {
-    ModulesChecker.prototype.getDepsFromRootPackageJson = jest
+    ModulesChecker.prototype.getDeps = jest
       .fn()
       .mockImplementationOnce(() => dependencies)
   }
