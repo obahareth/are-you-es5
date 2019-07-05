@@ -155,10 +155,10 @@ export class ModulesChecker {
           .filter(isDirectory)
       }
 
-      const getLeafFolderName = (path: string): string => {
+      const getLeafFolderName = (fullPath: string): string => {
         const needle = 'node_modules/'
-        const indexOfLastSlash = path.lastIndexOf(needle)
-        return path.substr(indexOfLastSlash + needle.length)
+        const indexOfLastSlash = fullPath.lastIndexOf(needle)
+        return fullPath.substr(indexOfLastSlash + needle.length)
       }
 
       let nodeModules = getDirectories(nodeModulesPath)
