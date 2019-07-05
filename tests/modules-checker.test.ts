@@ -1,5 +1,4 @@
 import * as acorn from 'acorn'
-import mockFs from 'mock-fs'
 import path from 'path'
 import { ModulesChecker } from '../src/modules-checker'
 import IModulesCheckerConfig from '../src/types/module-checker-config'
@@ -11,10 +10,6 @@ import {
 } from './support/helpers/dependencies'
 
 jest.mock('acorn')
-
-afterEach(() => {
-  mockFs.restore()
-})
 
 describe('static vars', () => {
   it('has a defaultConfig with logEs5Packages set to false', () => {
@@ -98,108 +93,6 @@ describe('isScriptEs5', () => {
     })
 
     spy.mockRestore()
-  })
-})
-
-describe('getMainScriptPath', () => {
-  const dependencyPath = path.join(__dirname, 'dep/path')
-  const modulesChecker = new ModulesChecker(dependencyPath)
-
-  describe('when main is in package json', () => {
-    let packageJson: IPackageJSON
-
-    beforeAll(() => {
-      packageJson = {
-        main: 'test.js',
-        name: 'test'
-      }
-    })
-
-    describe('and it exists', () => {
-      it("gets returned if it's a file", () => {
-        const expectedPath = path.join(dependencyPath, 'test.js')
-
-        mockFs({
-          [expectedPath]: 'it exists'
-        })
-
-        const mainScriptPath = modulesChecker.getMainScriptPath(
-          packageJson,
-          dependencyPath
-        )
-
-        expect(mainScriptPath).toEqual(expectedPath)
-      })
-
-      it("returns main/index.js if it's a directory and index.js exists", () => {
-        const mainDir = path.join(dependencyPath, packageJson.main)
-        const expectedPath = path.join(mainDir, 'index.js')
-
-        mockFs({
-          [mainDir]: {
-            'index.js': 'it exists'
-          }
-        })
-
-        const mainScriptPath = modulesChecker.getMainScriptPath(
-          packageJson,
-          dependencyPath
-        )
-
-        expect(mainScriptPath).toEqual(expectedPath)
-      })
-    })
-
-    describe("and it doesn't exist", () => {
-      it('returns index.js if it exists', () => {
-        const indexPath = path.join(dependencyPath, 'index.js')
-
-        mockFs({
-          [indexPath]: 'it exists'
-        })
-
-        const mainScriptPath = modulesChecker.getMainScriptPath(
-          packageJson,
-          dependencyPath
-        )
-
-        expect(mainScriptPath).toEqual(indexPath)
-      })
-
-      it("returns null if index.js doesn't exist", () => {
-        const mainScriptPath = modulesChecker.getMainScriptPath(
-          packageJson,
-          dependencyPath
-        )
-
-        expect(mainScriptPath).toEqual(null)
-      })
-    })
-  })
-
-  describe('when main is *not* in package.json', () => {
-    let packageJson: IPackageJSON
-
-    beforeAll(() => {
-      packageJson = {
-        name: 'test'
-      }
-    })
-
-    it('returns index.js if it exists', () => {
-      const indexPath = path.join(dependencyPath, 'index.js')
-
-      mockFs({
-        [indexPath]: 'it exists'
-      })
-
-      const mainScriptPath = modulesChecker.getMainScriptPath(
-        packageJson,
-        dependencyPath
-      )
-
-      expect(mainScriptPath).toEqual(indexPath)
-    })
   })
 })
 
