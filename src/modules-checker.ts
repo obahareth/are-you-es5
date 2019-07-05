@@ -155,8 +155,17 @@ export class ModulesChecker {
           .filter(isDirectory)
       }
 
+      const getLeafFolderName = (path: string): string => {
+        const needle = 'node_modules/'
+        const indexOfLastSlash = path.lastIndexOf(needle)
+        return path.substr(indexOfLastSlash + needle.length)
+      }
+
       let nodeModules = getDirectories(nodeModulesPath)
-        .filter(entry => !entry.endsWith('.bin'))
+        .filter(entry => {
+          const leafFolderName = getLeafFolderName(entry)
+          return !leafFolderName.startsWith('.')
+        })
         .map(entry => {
           // If this is a scope (folder starts with @), return all
           // folders inside it (scoped packages)
@@ -170,11 +179,9 @@ export class ModulesChecker {
       // Remove path from all strings
       // e.g. turn bla/bla/node_modules/@babel/core
       // into @babel/core
-      nodeModules = flatten(nodeModules).map((entry: string) => {
-        const needle = 'node_modules/'
-        const indexOfLastSlash = entry.lastIndexOf(needle)
-        return entry.substr(indexOfLastSlash + needle.length)
-      })
+      nodeModules = flatten(nodeModules).map((entry: string) =>
+        getLeafFolderName(entry)
+      )
 
       return nodeModules
     }
