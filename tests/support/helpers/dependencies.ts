@@ -1,5 +1,5 @@
 import path from 'path'
-import IDependencyWithPathAndOutput from "../types/dependency-with-path-and-output";
+import IDependencyWithPathAndOutput from '../types/dependency-with-path-and-output'
 
 export const directDependencies = [
   'acorn',
@@ -59,10 +59,7 @@ export const allDependenciesWithEntryPaths: IDependencyWithPathAndOutput[] = [
   {
     expectedOutput: '✅ is-even is ES5',
     name: 'is-even',
-    path: path.join(
-      __dirname,
-      '../fixtures/root/node_modules/is-even/index.js'
-    )
+    path: path.join(__dirname, '../fixtures/root/node_modules/is-even/index.js')
   },
   {
     expectedOutput: '✅ is-number is ES5',
@@ -75,10 +72,7 @@ export const allDependenciesWithEntryPaths: IDependencyWithPathAndOutput[] = [
   {
     expectedOutput: '✅ is-odd is ES5',
     name: 'is-odd',
-    path: path.join(
-      __dirname,
-      '../fixtures/root/node_modules/is-odd/index.js'
-    )
+    path: path.join(__dirname, '../fixtures/root/node_modules/is-odd/index.js')
   },
   {
     expectedOutput: '✅ js-tokens is ES5',
@@ -91,10 +85,7 @@ export const allDependenciesWithEntryPaths: IDependencyWithPathAndOutput[] = [
   {
     expectedOutput: '✅ kind-of is ES5',
     name: 'kind-of',
-    path: path.join(
-      __dirname,
-      '../fixtures/root/node_modules/kind-of/index.js'
-    )
+    path: path.join(__dirname, '../fixtures/root/node_modules/kind-of/index.js')
   },
   {
     expectedOutput: '✅ loose-envify is ES5',
@@ -123,10 +114,7 @@ export const allDependenciesWithEntryPaths: IDependencyWithPathAndOutput[] = [
   {
     expectedOutput: '✅ react is ES5',
     name: 'react',
-    path: path.join(
-      __dirname,
-      '../fixtures/root/node_modules/react/index.js'
-    )
+    path: path.join(__dirname, '../fixtures/root/node_modules/react/index.js')
   },
   {
     expectedOutput: '✅ react-is is ES5',
@@ -147,10 +135,7 @@ export const allDependenciesWithEntryPaths: IDependencyWithPathAndOutput[] = [
   {
     expectedOutput: '✅ uid is ES5',
     name: 'uid',
-    path: path.join(
-      __dirname,
-      '../fixtures/root/node_modules/uid/index.js'
-    )
+    path: path.join(__dirname, '../fixtures/root/node_modules/uid/index.js')
   },
   {
     expectedOutput: '✅ underscore is ES5',
