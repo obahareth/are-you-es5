@@ -6,6 +6,7 @@ import IModulesCheckerConfig from '../src/types/module-checker-config'
 import { IPackageJSON } from '../src/types/package-json'
 import {
   allDependencies,
+  allDependenciesWithEntryPaths,
   directDependencies
 } from './support/helpers/dependencies'
 
@@ -80,6 +81,23 @@ describe('isScriptEs5', () => {
 
     modulesChecker.isScriptEs5(scriptPath, dependencyName)
     expect(acorn.parse).toHaveBeenCalled()
+  })
+
+  it('works for all the fixtures', () => {
+    // Spy on console.log
+    const spy = jest.spyOn(global.console, 'log')
+
+    const modulesChecker = new ModulesChecker(
+      `${__dirname}/support/fixtures/root`,
+      { checkAllNodeModules: true, logEs5Packages: true }
+    )
+
+    allDependenciesWithEntryPaths.forEach(dependency => {
+      modulesChecker.isScriptEs5(dependency.path, dependency.name)
+      expect(console.log).toHaveBeenLastCalledWith(dependency.expectedOutput)
+    })
+
+    spy.mockRestore()
   })
 })
 
