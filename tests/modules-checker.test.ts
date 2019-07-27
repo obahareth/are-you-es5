@@ -42,7 +42,15 @@ describe('constructor', () => {
 
 describe('getDeps', () => {
   it('returns direct dependencies from package.json', () => {
-    const deps = ['acorn', 'commander', 'is-even']
+    const deps = [
+      'acorn',
+      'commander',
+      'is-even',
+      'react',
+      'uid',
+      'underscore',
+      'whatwg-fetch'
+    ]
     const modulesChecker = new ModulesChecker(
       path.join(__dirname, '/support/fixtures/root')
     )
@@ -60,7 +68,17 @@ describe('getDeps', () => {
       'is-even',
       'is-number',
       'is-odd',
-      'kind-of'
+      'js-tokens',
+      'kind-of',
+      'loose-envify',
+      'object-assign',
+      'prop-types',
+      'react',
+      'react-is',
+      'scheduler',
+      'uid',
+      'underscore',
+      'whatwg-fetch'
     ]
     const modulesChecker = new ModulesChecker(
       path.join(__dirname, '/support/fixtures/root'),
