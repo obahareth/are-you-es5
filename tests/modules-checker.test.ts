@@ -4,6 +4,10 @@ import path from 'path'
 import { ModulesChecker } from '../src/modules-checker'
 import IModulesCheckerConfig from '../src/types/module-checker-config'
 import { IPackageJSON } from '../src/types/package-json'
+import {
+  allDependencies,
+  directDependencies
+} from './support/helpers/dependencies'
 
 jest.mock('acorn')
 
@@ -42,44 +46,16 @@ describe('constructor', () => {
 
 describe('getDeps', () => {
   it('returns direct dependencies from package.json', () => {
-    const deps = [
-      'acorn',
-      'commander',
-      'is-even',
-      'react',
-      'uid',
-      'underscore',
-      'whatwg-fetch'
-    ]
     const modulesChecker = new ModulesChecker(
       path.join(__dirname, '/support/fixtures/root')
     )
 
     const parsedDeps = modulesChecker.getDeps()
 
-    expect(parsedDeps).toEqual(deps)
+    expect(parsedDeps).toEqual(directDependencies)
   })
 
   it('returns all node_modules when option is passed', () => {
-    const deps = [
-      'acorn',
-      'commander',
-      'is-buffer',
-      'is-even',
-      'is-number',
-      'is-odd',
-      'js-tokens',
-      'kind-of',
-      'loose-envify',
-      'object-assign',
-      'prop-types',
-      'react',
-      'react-is',
-      'scheduler',
-      'uid',
-      'underscore',
-      'whatwg-fetch'
-    ]
     const modulesChecker = new ModulesChecker(
       path.join(__dirname, '/support/fixtures/root'),
       { checkAllNodeModules: true }
@@ -87,7 +63,7 @@ describe('getDeps', () => {
 
     const parsedDeps = modulesChecker.getDeps()
 
-    expect(parsedDeps).toEqual(deps)
+    expect(parsedDeps).toEqual(allDependencies)
   })
 })
 
