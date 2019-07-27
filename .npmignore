@@ -3,4 +3,5 @@
 .github
 node_modules
 src
+tests
 yarn.lock
