@@ -7,8 +7,12 @@ export const directDependencies = [
   'is-even',
   'react',
   'uid',
-  'underscore',
   'whatwg-fetch'
+]
+
+export const subpackageDependencies = [
+  'acorn',
+  'underscore'
 ]
 
 export const allDependencies = [
@@ -27,7 +31,6 @@ export const allDependencies = [
   'react-is',
   'scheduler',
   'uid',
-  'underscore',
   'whatwg-fetch'
 ]
 
@@ -136,14 +139,6 @@ export const allDependenciesWithEntryPaths: IDependencyWithPathAndOutput[] = [
     expectedOutput: '✅ uid is ES5',
     name: 'uid',
     path: path.join(__dirname, '../fixtures/root/node_modules/uid/index.js')
-  },
-  {
-    expectedOutput: '✅ underscore is ES5',
-    name: 'underscore',
-    path: path.join(
-      __dirname,
-      '../fixtures/root/node_modules/underscore/underscore.js'
-    )
   },
   {
     expectedOutput: '✅ whatwg-fetch is ES5',

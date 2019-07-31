@@ -6,7 +6,8 @@ import { IPackageJSON } from '../src/types/package-json'
 import {
   allDependencies,
   allDependenciesWithEntryPaths,
-  directDependencies
+  directDependencies,
+  subpackageDependencies
 } from './support/helpers/dependencies'
 
 jest.mock('acorn')
@@ -134,5 +135,20 @@ describe('checkModules', () => {
       .mockImplementationOnce(() => true)).mockImplementationOnce(() => false)
 
     expect(modulesChecker.checkModules()).toEqual(['commander'])
+  })
+
+  it('works in monorepo subpackages', () => {
+    mockGetDepsFromRootPackageJson(subpackageDependencies)
+
+    const mockIsScriptEs5 = (ModulesChecker.prototype.isScriptEs5 = jest
+      .fn()
+      .mockImplementationOnce(() => true))
+
+    const subPackageModulesChecker = new ModulesChecker(
+      path.join(__dirname, '/support/fixtures/root/packages/some-package')
+    )
+
+    subPackageModulesChecker.checkModules()
+    expect(mockIsScriptEs5).toHaveBeenCalledTimes(subpackageDependencies.length)
   })
 })

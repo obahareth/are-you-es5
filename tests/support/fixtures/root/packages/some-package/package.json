@@ -1,0 +1,13 @@
+{
+  "name": "are-you-es5-subpackage-test",
+  "version": "1.0.7",
+  "description": "acorn is hoisted to the root node_modules, while underscore isn't.",
+  "repository": "https://github.com/obahareth/are-you-es5.git",
+  "author": "Omar Bahareth <omar@omar.engineer>",
+  "license": "MIT",
+  "private": false,
+  "dependencies": {
+    "acorn": "^6.0.6",
+    "underscore": "^1.9.1"
+  }
+}
