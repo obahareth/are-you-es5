@@ -10,10 +10,7 @@ export const directDependencies = [
   'whatwg-fetch'
 ]
 
-export const subpackageDependencies = [
-  'acorn',
-  'underscore'
-]
+export const subpackageDependencies = ['acorn', 'underscore']
 
 export const allDependencies = [
   'acorn',
