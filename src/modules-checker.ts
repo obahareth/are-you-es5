@@ -48,13 +48,14 @@ export class ModulesChecker {
   }
 
   public getDeps(): string[] | null {
-    if (!this.config.checkAllNodeModules) {
-      return this.getDepsFromRootPackageJson()
-    } else {
-      return this.getAllNodeModules()
+    const deps = this.getDepsFromRootPackageJson()
+
+    if (this.config.checkAllNodeModules) {
+      deps.push(...this.getAllNodeModules())
     }
 
-    return null
+    // convert to and from a Set to remove duplicates
+    return [...new Set(deps)].sort()
   }
 
   public isScriptEs5(scriptPath: string, dependencyName: string) {
