@@ -37,9 +37,6 @@ program
 
     if (cmd.regex) {
       console.log('\n\nBabel-loader exclude regex:')
-      console.log(
-        '(You should manually remove Webpack and Babel plugins from this regex)\n'
-      )
       console.log(getBabelLoaderIgnoreRegex(nonEs5Dependencies))
     }
   })
