@@ -57,19 +57,12 @@ Options:
 
 ```bash
 are-you-es5 check /path/to/some/repo -r
-❌ @babel/plugin-transform-block-scoping is not ES5
-❌ @babel/plugin-transform-object-assign is not ES5
-❌ @babel/plugin-transform-parameters is not ES5
-❌ @babel/preset-react is not ES5
-❌ @babel/register is not ES5
-❌ @rails/webpacker is not ES5
-❌ babel-plugin-lodash is not ES5
-❌ lodash-webpack-plugin is not ES5
+❌ @babel/plugin-1 is not ES5
+❌ @babel/plugin-2 is not ES5
 
 Babel-loader exclude regex:
-(You should manually remove Webpack and Babel plugins from this regex)
 
-/node_modules/(?![@babel/plugin-transform-block-scoping|@babel/plugin-transform-object-assign|@babel/plugin-transform-parameters|@babel/preset-react|@babel/register|@rails/webpacker|babel-plugin-lodash|lodash-webpack-plugin])/
+/node_modules/(?![plugin-1|plugin-2])/
 ```
 
 ## Credits
