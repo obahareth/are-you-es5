@@ -38,7 +38,7 @@ If you were on version 1.1, the `-a` or `-all` option used to be for logging all
 ```
 Usage: are-you-es5 check [options] <path>
 
-Checks if all node_modules (direct dependencies only) at <path> are ES5
+Checks if all node_modules (including monorepos) at <path> are ES5
 
 Options:
   -a, --all      Check all node_modules instead of just direct dependencies

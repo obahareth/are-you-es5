@@ -10,7 +10,7 @@ program
   .version('1.2.3')
   .command('check <path>')
   .description(
-    'Checks if all node_modules (direct dependencies only) at <path> are ES5'
+    'Checks if all node_modules (including monorepos) at <path> are ES5'
   )
   .option(
     '-a, --all',
