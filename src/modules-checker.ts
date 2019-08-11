@@ -20,7 +20,6 @@ export class ModulesChecker {
   }
 
   public checkModules(): string[] {
-    const nodeModulesDir = path.join(this.dir, 'node_modules')
     const dependencies = this.getDeps()
 
     if (!dependencies) {
@@ -30,16 +29,15 @@ export class ModulesChecker {
     const nonEs5Dependencies: string[] = []
 
     dependencies.forEach(dependency => {
-      const packagePath = path.join(nodeModulesDir, dependency)
-      const packageJson = require(path.join(packagePath, 'package.json'))
-
-      const mainScriptPath = this.getMainScriptPath(packageJson, packagePath)
-      if (mainScriptPath) {
-        const dependencyIsEs5 = this.isScriptEs5(mainScriptPath, dependency)
+      try {
+        const dependencyIsEs5 = this.isScriptEs5(
+          require.resolve(dependency, { paths: [this.dir] }),
+          dependency
+        )
         if (!dependencyIsEs5) {
           nonEs5Dependencies.push(dependency)
         }
-      } else {
+      } catch (err) {
         console.log(
           `⚠️ ${dependency} was not checked because no entry script was found`
         )
@@ -50,27 +48,14 @@ export class ModulesChecker {
   }
 
   public getDeps(): string[] | null {
-    if (!this.config.checkAllNodeModules) {
-      return this.getDepsFromRootPackageJson()
-    } else {
-      return this.getAllNodeModules()
+    const deps = this.getDepsFromRootPackageJson()
+
+    if (this.config.checkAllNodeModules) {
+      deps.push(...this.getAllNodeModules())
     }
 
-    return null
-  }
-
-  public getMainScriptPath(packageJson: IPackageJSON, dependencyPath: string) {
-    if (packageJson.main) {
-      return this.getMainScriptFromPackageJson(packageJson, dependencyPath)
-    } else {
-      const indexScriptPath = path.join(dependencyPath, 'index.js')
-
-      if (fs.existsSync(indexScriptPath)) {
-        return indexScriptPath
-      }
-    }
-
-    return null
+    // convert to and from a Set to remove duplicates
+    return [...new Set(deps)].sort()
   }
 
   public isScriptEs5(scriptPath: string, dependencyName: string) {
@@ -90,43 +75,6 @@ export class ModulesChecker {
     }
 
     return true
-  }
-
-  private getMainScriptFromPackageJson(
-    packageJson: IPackageJSON,
-    dependencyPath: string
-  ) {
-    const mainPath = path.join(dependencyPath, packageJson.main)
-
-    if (!fs.existsSync(mainPath)) {
-      // Some packages like uid have nonexistent paths in their main value
-      // and have an index.js that should be loaded instead, so we'll look
-      // for it if the main script doesn't exist
-      const indexScriptPath = path.join(dependencyPath, 'index.js')
-
-      if (fs.existsSync(indexScriptPath)) {
-        return indexScriptPath
-      }
-
-      return null
-    }
-
-    const mainStats = fs.lstatSync(mainPath)
-
-    if (mainStats.isFile()) {
-      return mainPath
-    }
-
-    // If it's a directory, return dir/index.js if it exists
-    if (mainStats.isDirectory()) {
-      const indexScriptPath = path.join(mainPath, 'index.js')
-
-      if (fs.existsSync(indexScriptPath)) {
-        return indexScriptPath
-      }
-    }
-
-    return null
   }
 
   private getDepsFromRootPackageJson() {
