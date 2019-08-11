@@ -66,10 +66,6 @@ Babel-loader exclude regex:
 /node_modules/(?![@babel/plugin-transform-block-scoping|@babel/plugin-transform-object-assign|@babel/plugin-transform-parameters|@babel/preset-react|@babel/register|@rails/webpacker|babel-plugin-lodash|lodash-webpack-plugin])/
 ```
 
-## TODO
-
-* [#2](https://github.com/obahareth/are-you-es5/issues/2) - Also check against all scripts required by entrypoint script, this should work for all JS module types.
-
 ## Credits
 
 - [acorn](https://github.com/acornjs/acorn) - All the actual ES5 checking happens through acorn, this package wouldn't exist without it.
