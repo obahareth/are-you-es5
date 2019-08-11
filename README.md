@@ -33,6 +33,11 @@ alias es5="are-you-es5"
 
 If you were on version 1.1, the `-a` or `-all` option used to be for logging all messages, this has now changed to `-v` or `--verbose` and `-a` and `-all` are now used as a flag to check all node modules.
 
+# Upgrading to 1.3
+
+1.3 Now by default skips checking anything that has the word `babel` or `webpack`, or if a string ends with `loader`.
+To restore previous behavior use the `--no-regex-filtering` option.
+
 ## Usage
 
 ```
