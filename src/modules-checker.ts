@@ -8,6 +8,8 @@ import { IPackageJSON } from './types/package-json'
 
 export class ModulesChecker {
   public static readonly defaultConfig: IModuleCheckerConfig = {
+    checkAllNodeModules: false,
+    ignoreBabelAndWebpackPackages: true,
     logEs5Packages: false
   }
 
@@ -48,10 +50,14 @@ export class ModulesChecker {
   }
 
   public getDeps(): string[] | null {
-    const deps = this.getDepsFromRootPackageJson()
+    let deps = this.getDepsFromRootPackageJson()
 
     if (this.config.checkAllNodeModules) {
       deps.push(...this.getAllNodeModules())
+    }
+
+    if (this.config.ignoreBabelAndWebpackPackages) {
+      deps = this.dependenciesWithoutBabelAndWebpackPages(deps)
     }
 
     // convert to and from a Set to remove duplicates
@@ -75,6 +81,12 @@ export class ModulesChecker {
     }
 
     return true
+  }
+
+  private dependenciesWithoutBabelAndWebpackPages(dependencies: string[]) {
+    const ignoreRegex = /(babel|webpack)|(loader$)/
+
+    return dependencies.filter(dep => !ignoreRegex.test(dep))
   }
 
   private getDepsFromRootPackageJson() {

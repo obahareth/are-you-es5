@@ -7,7 +7,9 @@ import {
   allDependencies,
   allDependenciesWithEntryPaths,
   directDependencies,
-  subpackageDependencies
+  subpackageDependencies,
+  directDependenciesWithoutBabelAndWebpack,
+  allDependenciesWithoutBabelAndWebpack
 } from './support/helpers/dependencies'
 
 jest.mock('acorn')
@@ -15,6 +17,8 @@ jest.mock('acorn')
 describe('static vars', () => {
   it('has a defaultConfig with logEs5Packages set to false', () => {
     expect(ModulesChecker.defaultConfig).toEqual({
+      checkAllNodeModules: false,
+      ignoreBabelAndWebpackPackages: true,
       logEs5Packages: false
     })
   })
@@ -35,7 +39,11 @@ describe('constructor', () => {
   })
 
   it('can receive a second optional config argument that overrides default config', () => {
-    const config: IModulesCheckerConfig = { logEs5Packages: true }
+    const config: IModulesCheckerConfig = {
+      checkAllNodeModules: false,
+      ignoreBabelAndWebpackPackages: true,
+      logEs5Packages: true // This is the overrideen value
+    }
 
     expect(new ModulesChecker('', config).config).toEqual(config)
   })
@@ -49,6 +57,17 @@ describe('getDeps', () => {
 
     const parsedDeps = modulesChecker.getDeps()
 
+    expect(parsedDeps).toEqual(directDependenciesWithoutBabelAndWebpack)
+  })
+
+  it('returns direct dependencies including babel and webpack if ignoreBabelAndWebpackPackages is passed as false', () => {
+    const modulesChecker = new ModulesChecker(
+      path.join(__dirname, '/support/fixtures/root'),
+      { ignoreBabelAndWebpackPackages: false }
+    )
+
+    const parsedDeps = modulesChecker.getDeps()
+
     expect(parsedDeps).toEqual(directDependencies)
   })
 
@@ -56,6 +75,17 @@ describe('getDeps', () => {
     const modulesChecker = new ModulesChecker(
       path.join(__dirname, '/support/fixtures/root'),
       { checkAllNodeModules: true }
+    )
+
+    const parsedDeps = modulesChecker.getDeps()
+
+    expect(parsedDeps).toEqual(allDependenciesWithoutBabelAndWebpack)
+  })
+
+  it('returns all node_modules including babel and webpack when checkAllNodeModules is true and ignoreBabelAndWebpackPackages is false', () => {
+    const modulesChecker = new ModulesChecker(
+      path.join(__dirname, '/support/fixtures/root'),
+      { checkAllNodeModules: true, ignoreBabelAndWebpackPackages: false }
     )
 
     const parsedDeps = modulesChecker.getDeps()

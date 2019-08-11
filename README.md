@@ -41,10 +41,11 @@ Usage: are-you-es5 check [options] <path>
 Checks if all node_modules (including monorepos) at <path> are ES5
 
 Options:
-  -a, --all      Check all node_modules instead of just direct dependencies
-  -v, --verbose  Log all messages (including modules that are ES5)
-  -r, --regex    Get babel-loader exclude regex to ignore all node_modules except non-ES5 ones
-  -h, --help     output usage information
+  -a, --all             Check all node_modules instead of just direct dependencies
+  -v, --verbose         Log all messages (including modules that are ES5)
+  --no-regex-filtering  Stops all filtering on babel-loader exclude regex (does not hide anything)
+  -r, --regex           Get babel-loader exclude regex to ignore all node_modules except non-ES5 ones, by default does not show any babel or webpack modules, use with --no-regex-filtering if you want to see everything
+  -h, --help            output usage information
 ```
 
 ### Example

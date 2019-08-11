@@ -18,12 +18,17 @@ program
   )
   .option('-v, --verbose', 'Log all messages (including modules that are ES5)')
   .option(
+    '--no-regex-filtering',
+    'Stops all filtering on babel-loader exclude regex (does not hide anything) '
+  )
+  .option(
     '-r, --regex',
-    'Get babel-loader exclude regex to ignore all node_modules except non-ES5 ones'
+    'Get babel-loader exclude regex to ignore all node_modules except non-ES5 ones, by default does not show any babel or webpack modules, use with --no-regex-filtering if you want to see everything'
   )
   .action((path: string, cmd: any) => {
     const config: IModuleCheckerConfig = {
       checkAllNodeModules: cmd.all === true,
+      ignoreBabelAndWebpackPackages: cmd.regexFiltering,
       logEs5Packages: cmd.verbose === true
     }
 

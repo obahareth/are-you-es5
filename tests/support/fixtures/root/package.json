@@ -7,8 +7,10 @@
   "license": "MIT",
   "private": false,
   "dependencies": {
+    "@babel/core": "7.5.5",
     "acorn": "^6.0.6",
     "commander": "^2.19.0",
+    "css-loader": "3.2.0",
     "is-even": "^1.0.0",
     "react": "^16.8.6",
     "uid": "^0.0.2",
