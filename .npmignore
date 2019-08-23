@@ -1,7 +1,15 @@
 .prettierrc
 .gitignore
 .github
+.vscode
+.circleci
+.git
 node_modules
 src
 tests
+
 yarn.lock
+tslint.json
+tsconfig.json
+jest.config.js
+.prettierrc
