@@ -7,7 +7,7 @@ import { ModulesChecker } from './modules-checker'
 import IModuleCheckerConfig from './types/module-checker-config'
 
 program
-  .version('1.3.2')
+  .version('1.3.3')
   .command('check <path>')
   .description(
     'Checks if all node_modules (including monorepos) at <path> are ES5'
