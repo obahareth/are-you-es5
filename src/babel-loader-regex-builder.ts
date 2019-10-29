@@ -12,5 +12,5 @@ export function getBabelLoaderIgnoreRegex(dependencies: string[]) {
 }
 
 function escapeNamespacedDependencies(dependencies: string[]): string[] {
-  return dependencies.map((dep) => dep.replace("/", "\\/"))
+  return dependencies.map(dep => dep.replace('/', '\\/'))
 }
