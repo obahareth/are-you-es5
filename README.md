@@ -53,6 +53,31 @@ Options:
   -h, --help            output usage information
 ```
 
+### Usage as a Library
+
+If you would like to use this package as a NodeJS library instead of a CLI dependency, you may use this snippet:
+
+```js
+const regexBuilder = require('are-you-es5/dist/babel-loader-regex-builder')
+const modulesChecker = require('are-you-es5/dist/modules-checker')
+
+const config = {
+  checkAllNodeModules: true,
+  ignoreBabelAndWebpackPackages: true,
+  logEs5Packages: false
+}
+
+// This should be a path to a directory containing both a 
+// package.json file and node_modules directory
+const path = "path/to/dir"
+const checker = new modulesChecker.ModulesChecker(path, config)
+const nonEs5Dependencies = checker.checkModules()
+
+console.log(regexBuilder.getBabelLoaderIgnoreRegex(nonEs5Dependencies))
+```
+
+_My NodeJS import skills are rusty, that's why this unfortunate `modulesChecker.ModulesChecker_ is here.
+
 ### Example
 
 ```bash
