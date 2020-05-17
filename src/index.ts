@@ -25,11 +25,16 @@ program
     '-r, --regex',
     'Get babel-loader exclude regex to ignore all node_modules except non-ES5 ones, by default does not show any babel or webpack modules, use with --no-regex-filtering if you want to see everything'
   )
+  .option(
+    '--silent',
+    'Do not log messages in the console (except regex if --regex is used)'
+  )
   .action((path: string, cmd: any) => {
     const config: IModuleCheckerConfig = {
       checkAllNodeModules: cmd.all === true,
       ignoreBabelAndWebpackPackages: cmd.regexFiltering,
-      logEs5Packages: cmd.verbose === true
+      logEs5Packages: cmd.verbose === true,
+      silent: cmd.silent === true
     }
 
     const checker = new ModulesChecker(path, config)

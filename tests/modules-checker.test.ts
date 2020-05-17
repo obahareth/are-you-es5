@@ -19,7 +19,8 @@ describe('static vars', () => {
     expect(ModulesChecker.defaultConfig).toEqual({
       checkAllNodeModules: false,
       ignoreBabelAndWebpackPackages: true,
-      logEs5Packages: false
+      logEs5Packages: false,
+      silent: false
     })
   })
 })
@@ -42,7 +43,8 @@ describe('constructor', () => {
     const config: IModulesCheckerConfig = {
       checkAllNodeModules: false,
       ignoreBabelAndWebpackPackages: true,
-      logEs5Packages: true // This is the overrideen value
+      logEs5Packages: true, // This is the overrideen value
+      silent: false
     }
 
     expect(new ModulesChecker('', config).config).toEqual(config)
@@ -180,5 +182,26 @@ describe('checkModules', () => {
 
     subPackageModulesChecker.checkModules()
     expect(mockIsScriptEs5).toHaveBeenCalledTimes(subpackageDependencies.length)
+  })
+})
+
+describe('silent', () => {
+  it('should not log', () => {
+    // Spy on console.log
+    const spy = jest.spyOn(global.console, 'log')
+
+    const modulesChecker = new ModulesChecker(
+      `${__dirname}/support/fixtures/root`,
+      { checkAllNodeModules: true, logEs5Packages: true, silent: true }
+    )
+
+    allDependenciesWithEntryPaths.forEach(dependency => {
+      modulesChecker.isScriptEs5(dependency.path, dependency.name)
+      expect(console.log).not.toHaveBeenLastCalledWith(
+        dependency.expectedOutput
+      )
+    })
+
+    spy.mockRestore()
   })
 })

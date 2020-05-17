@@ -10,7 +10,8 @@ export class ModulesChecker {
   public static readonly defaultConfig: IModuleCheckerConfig = {
     checkAllNodeModules: false,
     ignoreBabelAndWebpackPackages: true,
-    logEs5Packages: false
+    logEs5Packages: false,
+    silent: false
   }
 
   constructor(
@@ -40,7 +41,7 @@ export class ModulesChecker {
           nonEs5Dependencies.push(dependency)
         }
       } catch (err) {
-        console.log(
+        this.log(
           `⚠️ ${dependency} was not checked because no entry script was found`
         )
       }
@@ -72,12 +73,12 @@ export class ModulesChecker {
     try {
       acorn.parse(code, acornOpts)
     } catch (err) {
-      console.log(`❌ ${dependencyName} is not ES5`)
+      this.log(`❌ ${dependencyName} is not ES5`)
       return false
     }
 
     if (this.config.logEs5Packages) {
-      console.log(`✅ ${dependencyName} is ES5`)
+      this.log(`✅ ${dependencyName} is ES5`)
     }
 
     return true
@@ -94,8 +95,7 @@ export class ModulesChecker {
     const packageJson = require(packageJsonPath)
 
     if (!packageJson) {
-      console.error(`Failed to load package.json in ${this.dir}`)
-      return null
+      throw new Error(`Failed to load package.json in ${this.dir}`)
     }
 
     return Object.keys(packageJson.dependencies)
@@ -146,7 +146,12 @@ export class ModulesChecker {
       return nodeModules
     }
 
-    console.error(`Failed to find node_modules at ${this.dir}`)
-    return null
+    throw new Error(`Failed to find node_modules at ${this.dir}`)
+  }
+
+  private log(message: string) {
+    if (!this.config.silent) {
+      console.log(message)
+    }
   }
 }
