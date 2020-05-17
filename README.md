@@ -50,6 +50,7 @@ Options:
   -v, --verbose         Log all messages (including modules that are ES5)
   --no-regex-filtering  Stops all filtering on babel-loader exclude regex (does not hide anything)
   -r, --regex           Get babel-loader exclude regex to ignore all node_modules except non-ES5 ones, by default does not show any babel or webpack modules, use with --no-regex-filtering if you want to see everything
+  --silent              Do not log messages in the console (except regex if --regex is used)
   -h, --help            output usage information
 ```
 
