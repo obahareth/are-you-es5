@@ -1,8 +1,8 @@
-import { ModulesChecker } from './modules-checker'
 import findUp from 'find-up'
 import path from 'path'
+import { ModulesChecker } from './modules-checker'
 
-interface CheckModulesOption {
+interface ICheckModulesOption {
   /** Path to package.json. If not specified, find it from current cwd */
   path?: string
   /** Check all node_modules instead of just direct dependencies. Default: false */
@@ -15,14 +15,14 @@ export function checkModules({
   path: userPath,
   checkAllNodeModules = false,
   ignoreBabelAndWebpackPackages = true
-}: CheckModulesOption) {
+}: ICheckModulesOption) {
   const dir = userPath || path.dirname(findUp.sync('package.json'))
 
   const checker = new ModulesChecker(dir, {
     checkAllNodeModules,
     ignoreBabelAndWebpackPackages,
-    silent: true,
-    logEs5Packages: false
+    logEs5Packages: false,
+    silent: true
   })
   return checker.getDeps()
 }
