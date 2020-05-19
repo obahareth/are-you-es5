@@ -1,6 +1,6 @@
 # are-you-es5
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 [![](https://img.shields.io/circleci/project/github/obahareth/are-you-es5/master.svg?style=popout)](https://circleci.com/gh/obahareth/are-you-es5)
@@ -108,6 +108,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <!-- markdownlint-disable -->
 <table>
   <tr>
+    <td align="center"><a href="https://github.com/depoulo"><img src="https://avatars0.githubusercontent.com/u/4457202?v=4" width="100px;" alt=""/><br /><sub><b>Paolo Priotto</b></sub></a><br /><a href="https://github.com/obahareth/are-you-es5/commits?author=depoulo" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/tooppaaa"><img src="https://avatars2.githubusercontent.com/u/599163?v=4" width="100px;" alt=""/><br /><sub><b>Clément DUNGLER</b></sub></a><br /><a href="https://github.com/obahareth/are-you-es5/commits?author=tooppaaa" title="Code">💻</a></td>
   </tr>
 </table>
