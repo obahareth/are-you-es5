@@ -1,10 +1,10 @@
 # are-you-es5
+
 [![](https://img.shields.io/circleci/project/github/obahareth/are-you-es5/master.svg?style=popout)](https://circleci.com/gh/obahareth/are-you-es5)
 [![](https://img.shields.io/npm/v/are-you-es5.svg?style=popout)](https://www.npmjs.com/package/are-you-es5)
 ![](https://img.shields.io/node/v/are-you-es5.svg?style=popout)
 
-
-A package to help you find out which of your `node_modules` aren't written in ES5 so you can add them to your Webpack/Rollup/Parcel  transpilation steps. This is currently [limited to checking the entrypoint scripts only](https://github.com/obahareth/are-you-es5/issues/2), which **might** actually be enough of a check to determine if a package should be transpiled or not.
+A package to help you find out which of your `node_modules` aren't written in ES5 so you can add them to your Webpack/Rollup/Parcel transpilation steps. This is currently [limited to checking the entrypoint scripts only](https://github.com/obahareth/are-you-es5/issues/2), which **might** actually be enough of a check to determine if a package should be transpiled or not.
 
 ![](./.github/assets/example.png)
 
@@ -23,6 +23,7 @@ npx are-you-es5 check /path/to/some/repo
 ```
 
 ### Aliasing
+
 If you've installed it globally and find it tiresome to type `are-you-es5` a lot, you can alias it to `es5`:
 
 ```bash
@@ -59,25 +60,24 @@ Options:
 If you would like to use this package as a NodeJS library instead of a CLI dependency, you may use this snippet:
 
 ```js
-const regexBuilder = require('are-you-es5/dist/babel-loader-regex-builder')
-const modulesChecker = require('are-you-es5/dist/modules-checker')
+import {
+  checkModules,
+  buildIncludeRegexp,
+  buildExcludeRegexp
+} from 'are-you-es5'
 
-const config = {
+const result = checkModules({
+  path: '', // Automatically find up package.json from cwd
   checkAllNodeModules: true,
-  ignoreBabelAndWebpackPackages: true,
-  logEs5Packages: false
-}
+  ignoreBabelAndWebpackPackages: true
+})
 
-// This should be a path to a directory containing both a 
-// package.json file and node_modules directory
-const path = "path/to/dir"
-const checker = new modulesChecker.ModulesChecker(path, config)
-const nonEs5Dependencies = checker.checkModules()
+/** Returns the regexp including all es6 modules */
+const es6IncludeRegExp = buildIncludeRegexp(result.es6Modules)
 
-console.log(regexBuilder.getBabelLoaderIgnoreRegex(nonEs5Dependencies))
+/** Returns the regexp excluding all es6 modules */
+const es6ExcludeRegexp = buildExcludeRegexp(result.es6Modules)
 ```
-
-_My NodeJS import skills are rusty, that's why this unfortunate `modulesChecker.ModulesChecker_ is here.
 
 ### Example
 
@@ -95,4 +95,3 @@ Babel-loader exclude regex:
 
 - [acorn](https://github.com/acornjs/acorn) - All the actual ES5 checking happens through acorn, this package wouldn't exist without it.
 - [es-check](https://github.com/dollarshaveclub/es-check) - This whole package wouldn't have been possible if I hadn't come across es-check and learned from it.
-

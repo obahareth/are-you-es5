@@ -23,13 +23,19 @@ export class ModulesChecker {
   }
 
   public checkModules(): string[] {
-    const dependencies = this.getDeps()
+    return this.parseDeps().es6Modules
+  }
 
-    if (!dependencies) {
-      return []
-    }
+  public parseDeps(): {
+    es5Modules: string[]
+    es6Modules: string[]
+    ignored: string[]
+  } {
+    const dependencies = this.getDeps() || []
 
-    const nonEs5Dependencies: string[] = []
+    const es5Modules: string[] = []
+    const es6Modules: string[] = []
+    const ignored: string[] = []
 
     dependencies.forEach(dependency => {
       try {
@@ -37,17 +43,15 @@ export class ModulesChecker {
           require.resolve(dependency, { paths: [this.dir] }),
           dependency
         )
-        if (!dependencyIsEs5) {
-          nonEs5Dependencies.push(dependency)
-        }
+        dependencyIsEs5
+          ? es5Modules.push(dependency)
+          : es6Modules.push(dependency)
       } catch (err) {
-        this.log(
-          `⚠️ ${dependency} was not checked because no entry script was found`
-        )
+        ignored.push(dependency)
       }
     })
 
-    return nonEs5Dependencies
+    return { es5Modules, es6Modules, ignored }
   }
 
   public getDeps(): string[] | null {
