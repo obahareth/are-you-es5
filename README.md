@@ -109,6 +109,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <table>
   <tr>
     <td align="center"><a href="https://github.com/depoulo"><img src="https://avatars0.githubusercontent.com/u/4457202?v=4" width="100px;" alt=""/><br /><sub><b>Paolo Priotto</b></sub></a><br /><a href="https://github.com/obahareth/are-you-es5/commits?author=depoulo" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/tooppaaa"><img src="https://avatars2.githubusercontent.com/u/599163?v=4" width="100px;" alt=""/><br /><sub><b>Clément DUNGLER</b></sub></a><br /><a href="https://github.com/obahareth/are-you-es5/commits?author=tooppaaa" title="Code">💻</a></td>
   </tr>
 </table>
 
