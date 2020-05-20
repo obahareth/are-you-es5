@@ -4,6 +4,7 @@ import fs, { lstatSync } from 'fs'
 import path from 'path'
 
 import IModuleCheckerConfig from './types/module-checker-config'
+import IModuleCheckerResult from './types/module-checker-result'
 import { IPackageJSON } from './types/package-json'
 
 export class ModulesChecker {
@@ -22,8 +23,8 @@ export class ModulesChecker {
     this.config = { ...ModulesChecker.defaultConfig, ...config }
   }
 
-  public checkModules(): string[] {
-    return this.parseDeps().es6Modules
+  public checkModules(): IModuleCheckerResult {
+    return this.parseDeps()
   }
 
   public parseDeps(): {

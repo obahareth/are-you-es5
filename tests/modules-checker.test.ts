@@ -2,14 +2,15 @@ import * as acorn from 'acorn'
 import path from 'path'
 import { ModulesChecker } from '../src/modules-checker'
 import IModulesCheckerConfig from '../src/types/module-checker-config'
+import IModuleCheckerResult from '../src/types/module-checker-result'
 import { IPackageJSON } from '../src/types/package-json'
 import {
   allDependencies,
   allDependenciesWithEntryPaths,
+  allDependenciesWithoutBabelAndWebpack,
   directDependencies,
-  subpackageDependencies,
   directDependenciesWithoutBabelAndWebpack,
-  allDependenciesWithoutBabelAndWebpack
+  subpackageDependencies
 } from './support/helpers/dependencies'
 
 jest.mock('acorn')
@@ -140,10 +141,14 @@ describe('checkModules', () => {
       .mockImplementationOnce(() => dependencies)
   }
 
-  it('returns an empty array if no dependencies could be retrieved', () => {
+  it('returns empty arrays if no dependencies could be retrieved', () => {
     mockGetDepsFromRootPackageJson(null)
 
-    expect(modulesChecker.checkModules()).toEqual([])
+    const result: IModuleCheckerResult = modulesChecker.checkModules()
+
+    expect(result.es5Modules).toEqual([])
+    expect(result.es6Modules).toEqual([])
+    expect(result.ignored).toEqual([])
   })
 
   it('calls isScriptEs5 for each dependency', () => {
@@ -158,7 +163,7 @@ describe('checkModules', () => {
     expect(mockIsScriptEs5).toHaveBeenCalledTimes(dependencies.length)
   })
 
-  it('returns an array of non-es5 dependencies', () => {
+  it('returns an IModuleCheckerResult with array of non-es5 dependencies', () => {
     const dependencies = ['acorn', 'commander']
     mockGetDepsFromRootPackageJson(dependencies)
 
@@ -166,7 +171,8 @@ describe('checkModules', () => {
       .fn()
       .mockImplementationOnce(() => true)).mockImplementationOnce(() => false)
 
-    expect(modulesChecker.checkModules()).toEqual(['commander'])
+    const result = modulesChecker.checkModules()
+    expect(result.es6Modules).toEqual(['commander'])
   })
 
   it('works in monorepo subpackages', () => {

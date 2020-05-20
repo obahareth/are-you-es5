@@ -38,7 +38,7 @@ program
     }
 
     const checker = new ModulesChecker(path, config)
-    const nonEs5Dependencies = checker.checkModules()
+    const nonEs5Dependencies = checker.checkModules().es6Modules
 
     if (cmd.regex) {
       console.log('\n\nBabel-loader exclude regex:')
