@@ -38,11 +38,11 @@ program
     }
 
     const checker = new ModulesChecker(path, config)
-    const nonEs5Dependencies = checker.checkModules().es6Modules
+    const { es6Modules } = checker.checkModules()
 
     if (cmd.regex) {
       console.log('\n\nBabel-loader exclude regex:')
-      console.log(getBabelLoaderIgnoreRegex(nonEs5Dependencies))
+      console.log(getBabelLoaderIgnoreRegex(es6Modules))
     }
   })
 
