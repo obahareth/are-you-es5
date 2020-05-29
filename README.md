@@ -1,6 +1,9 @@
 # are-you-es5
+
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+
 [![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
+
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 [![](https://img.shields.io/circleci/project/github/obahareth/are-you-es5/master.svg?style=popout)](https://circleci.com/gh/obahareth/are-you-es5)
@@ -76,10 +79,10 @@ const result = checkModules({
 })
 
 /** Returns the regexp including all es6 modules */
-const es6IncludeRegExp = buildIncludeRegexp(result.es6Modules)
+const es6IncludeRegExp = buildIncludeRegexp(result)
 
 /** Returns the regexp excluding all es6 modules */
-const es6ExcludeRegexp = buildExcludeRegexp(result.es6Modules)
+const es6ExcludeRegexp = buildExcludeRegexp(result)
 ```
 
 ### Example
@@ -115,6 +118,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 
 <!-- markdownlint-enable -->
 <!-- prettier-ignore-end -->
+
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
