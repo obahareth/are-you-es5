@@ -24,7 +24,7 @@ export function checkModules({
     logEs5Packages: false,
     silent: true
   })
-  return checker.getDeps()
+  return checker.checkModules()
 }
 
 export {

@@ -1,6 +1,6 @@
 {
   "name": "are-you-es5",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "A package to help you find out which of your `node_modules` aren't ES5 so you can add them to your transpilation steps.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
