@@ -41,14 +41,14 @@ program
 
     const checker = new ModulesChecker(path, config)
     const logger = new Logger(config)
-    const nonEs5Dependencies = checker.checkModules()
+    const { es6Modules } = checker.checkModules()
 
     if (cmd.regex) {
       console.log('\n\nBabel-loader exclude regex:')
-      console.log(getBabelLoaderIgnoreRegex(nonEs5Dependencies))
+      console.log(getBabelLoaderIgnoreRegex(es6Modules))
     }
 
-    if (nonEs5Dependencies.length !== 0) {
+    if (es6Modules.length !== 0) {
       const error = CLI_ERRORS.nonES5DependenciesDetected
       logger.log(error.message)
 

@@ -5,6 +5,7 @@ import path from 'path'
 
 import { Logger } from './logger'
 import IModuleCheckerConfig from './types/module-checker-config'
+import IModuleCheckerResult from './types/module-checker-result'
 import { IPackageJSON } from './types/package-json'
 
 export class ModulesChecker {
@@ -26,8 +27,8 @@ export class ModulesChecker {
     this.logger = new Logger(config)
   }
 
-  public checkModules(): string[] {
-    return this.parseDeps().es6Modules
+  public checkModules(): IModuleCheckerResult {
+    return this.parseDeps()
   }
 
   public parseDeps(): {
