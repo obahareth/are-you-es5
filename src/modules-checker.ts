@@ -3,6 +3,7 @@ import flatten from 'array-flatten'
 import fs, { lstatSync } from 'fs'
 import path from 'path'
 
+import { Logger } from './logger'
 import IModuleCheckerConfig from './types/module-checker-config'
 import { IPackageJSON } from './types/package-json'
 
@@ -14,12 +15,15 @@ export class ModulesChecker {
     silent: false
   }
 
+  private logger: Logger
+
   constructor(
     readonly dir: string,
     readonly config: IModuleCheckerConfig = ModulesChecker.defaultConfig
   ) {
     this.dir = path.resolve(dir)
     this.config = { ...ModulesChecker.defaultConfig, ...config }
+    this.logger = new Logger(config)
   }
 
   public checkModules(): string[] {
@@ -77,12 +81,12 @@ export class ModulesChecker {
     try {
       acorn.parse(code, acornOpts)
     } catch (err) {
-      this.log(`❌ ${dependencyName} is not ES5`)
+      this.logger.log(`❌ ${dependencyName} is not ES5`)
       return false
     }
 
     if (this.config.logEs5Packages) {
-      this.log(`✅ ${dependencyName} is ES5`)
+      this.logger.log(`✅ ${dependencyName} is ES5`)
     }
 
     return true
@@ -151,11 +155,5 @@ export class ModulesChecker {
     }
 
     throw new Error(`Failed to find node_modules at ${this.dir}`)
-  }
-
-  private log(message: string) {
-    if (!this.config.silent) {
-      console.log(message)
-    }
   }
 }
