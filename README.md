@@ -36,15 +36,6 @@ If you've installed it globally and find it tiresome to type `are-you-es5` a lot
 alias es5="are-you-es5"
 ```
 
-# Upgrading from 1.1
-
-If you were on version 1.1, the `-a` or `-all` option used to be for logging all messages, this has now changed to `-v` or `--verbose` and `-a` and `-all` are now used as a flag to check all node modules.
-
-# Upgrading to 1.3
-
-1.3 Now by default skips checking anything that has the word `babel` or `webpack`, or if a string ends with `loader`.
-To restore previous behavior use the `--no-regex-filtering` option.
-
 ## Usage
 
 ```
@@ -79,10 +70,10 @@ const result = checkModules({
 })
 
 /** Returns the regexp including all es6 modules */
-const es6IncludeRegExp = buildIncludeRegexp(result)
+const es6IncludeRegExp = buildIncludeRegexp(result.es6Modules)
 
 /** Returns the regexp excluding all es6 modules */
-const es6ExcludeRegexp = buildExcludeRegexp(result)
+const es6ExcludeRegexp = buildExcludeRegexp(result.es6Modules)
 ```
 
 ### Example
@@ -96,6 +87,20 @@ Babel-loader exclude regex:
 
 /node_modules/(?![plugin-1|plugin-2])/
 ```
+
+## Upgrading
+
+### Upgrading from 1.1
+
+If you were on version 1.1, the `-a` or `-all` option used to be for logging all messages, this has now changed to `-v` or `--verbose` and `-a` and `-all` are now used as a flag to check all node modules.
+
+### Upgrading to 1.3
+
+1.3 Now by default skips checking anything that has the word `babel` or `webpack`, or if a string ends with `loader`.
+To restore previous behavior use the `--no-regex-filtering` option.
+
+### Upgrading from 2.0 to 2.1
+This upgrade only affects you if you were using the package as a library (instead of just a CLI tool), `checkModules` now returns an object that has 3 arrays: `es5Modules`, `es6Modules`, and `ignored`. To preserve previous behavior use `es6Modules`, see the [Usage as a Library](#usage-as-a-library) section.
 
 ## Credits
 
