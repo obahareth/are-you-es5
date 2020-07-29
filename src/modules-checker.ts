@@ -125,7 +125,7 @@ export class ModulesChecker {
       }
 
       const getLeafFolderName = (fullPath: string): string => {
-        const needle = 'node_modules/'
+        const needle = 'node_modules' + path.sep
         const indexOfLastSlash = fullPath.lastIndexOf(needle)
         return fullPath.substr(indexOfLastSlash + needle.length)
       }
