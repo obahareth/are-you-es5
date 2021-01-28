@@ -34,6 +34,6 @@ export function buildIncludeRegexp(dependencies: string[]) {
  */
 export function buildExcludeRegexp(dependencies: string[]) {
   return new RegExp(
-    `${nodeModules}?!(${dependencies.map(escape).join('|')})${crossEnvSlash}`
+    `${nodeModules}(?!(${dependencies.map(escape).join('|')})${crossEnvSlash})`
   )
 }
