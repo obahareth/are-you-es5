@@ -48,11 +48,11 @@ program
     const { es6Modules } = checker.checkModules()
 
     if (cmd.regex) {
-      console.log('\n\nBabel-loader exclude regex:')
+      console.warn('\n\nBabel-loader exclude regex:')
       console.log(getBabelLoaderIgnoreRegex(es6Modules))
     }
     if (cmd.list) {
-      console.log('\n\nArray:');
+      console.warn('\n\nArray:');
       console.log(JSON.stringify(es6Modules));
     }
 
