@@ -24,6 +24,10 @@ program
     'Stops all filtering on babel-loader exclude regex (does not hide anything) '
   )
   .option(
+    '-l, --list',
+    "Return a JSON.stringify'd array of modules for use with vue.config.js in transpileDependencies"
+  )
+  .option(
     '-r, --regex',
     'Get babel-loader exclude regex to ignore all node_modules except non-ES5 ones, by default does not show any babel or webpack modules, use with --no-regex-filtering if you want to see everything'
   )
@@ -46,6 +50,10 @@ program
     if (cmd.regex) {
       console.log('\n\nBabel-loader exclude regex:')
       console.log(getBabelLoaderIgnoreRegex(es6Modules))
+    }
+    if (cmd.list) {
+      console.log('\n\nArray:');
+      console.log(JSON.stringify(es6Modules));
     }
 
     if (es6Modules.length !== 0) {
