@@ -107,7 +107,7 @@ export class ModulesChecker {
       throw new Error(`Failed to load package.json in ${this.dir}`)
     }
 
-    return Object.keys(packageJson.dependencies)
+    return Object.keys(packageJson.dependencies || {})
   }
 
   private getAllNodeModules(): string[] | null {
