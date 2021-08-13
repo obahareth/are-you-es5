@@ -7,7 +7,10 @@ export class Logger {
 
   public log(message: string) {
     if (!this.config.silent) {
-      console.log(message)
+      // Use console.warn so the messages go to stderr instead of stdout;
+      // that makes it easier to use this from a shell script where you can
+      // redirect stdout and everything is useful.
+      console.warn(message)
     }
   }
 }
