@@ -4,7 +4,7 @@
 [![All Contributors](https://img.shields.io/badge/all_contributors-3-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
-[![](https://img.shields.io/circleci/project/github/obahareth/are-you-es5/master.svg?style=popout)](https://circleci.com/gh/obahareth/are-you-es5)
+[![](https://img.shields.io/github/workflow/status/obahareth/are-you-es5/CI?style=popout)](https://github.com/obahareth/are-you-es5/actions/workflows/ci.yml)
 [![](https://img.shields.io/npm/v/are-you-es5.svg?style=popout)](https://www.npmjs.com/package/are-you-es5)
 ![](https://img.shields.io/node/v/are-you-es5.svg?style=popout)
 
