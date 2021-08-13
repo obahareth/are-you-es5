@@ -1,7 +1,7 @@
 # are-you-es5
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-3-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-4-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 [![](https://img.shields.io/github/workflow/status/obahareth/are-you-es5/CI?style=popout)](https://github.com/obahareth/are-you-es5/actions/workflows/ci.yml)
@@ -114,14 +114,16 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <!-- markdownlint-disable -->
 <table>
   <tr>
-    <td align="center"><a href="https://github.com/tooppaaa"><img src="https://avatars2.githubusercontent.com/u/599163?v=4" width="100px;" alt=""/><br /><sub><b>Clément DUNGLER</b></sub></a><br /><a href="https://github.com/obahareth/are-you-es5/commits?author=tooppaaa" title="Code">💻</a></td>
-    <td align="center"><a href="https://github.com/depoulo"><img src="https://avatars0.githubusercontent.com/u/4457202?v=4" width="100px;" alt=""/><br /><sub><b>Paolo Priotto</b></sub></a><br /><a href="https://github.com/obahareth/are-you-es5/commits?author=depoulo" title="Code">💻</a></td>
-    <td align="center"><a href="https://github.com/yhatt"><img src="https://avatars1.githubusercontent.com/u/3993388?v=4" width="100px;" alt=""/><br /><sub><b>Yuki Hattori</b></sub></a><br /><a href="https://github.com/obahareth/are-you-es5/commits?author=yhatt" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/tooppaaa"><img src="https://avatars2.githubusercontent.com/u/599163?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Clément DUNGLER</b></sub></a><br /><a href="https://github.com/obahareth/are-you-es5/commits?author=tooppaaa" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/depoulo"><img src="https://avatars0.githubusercontent.com/u/4457202?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Paolo Priotto</b></sub></a><br /><a href="https://github.com/obahareth/are-you-es5/commits?author=depoulo" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/yhatt"><img src="https://avatars1.githubusercontent.com/u/3993388?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Yuki Hattori</b></sub></a><br /><a href="https://github.com/obahareth/are-you-es5/commits?author=yhatt" title="Code">💻</a></td>
+    <td align="center"><a href="https://about.me/renanbandeira"><img src="https://avatars.githubusercontent.com/u/1872284?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Renan Bandeira</b></sub></a><br /><a href="https://github.com/obahareth/are-you-es5/commits?author=renanbandeira" title="Code">💻</a></td>
   </tr>
 </table>
 
-<!-- markdownlint-enable -->
+<!-- markdownlint-restore -->
 <!-- prettier-ignore-end -->
+
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!

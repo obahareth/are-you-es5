@@ -31,6 +31,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "renanbandeira",
+      "name": "Renan Bandeira",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1872284?v=4",
+      "profile": "https://about.me/renanbandeira",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
