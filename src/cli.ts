@@ -31,6 +31,10 @@ program
     '--silent',
     'Do not log messages in the console (except regex if --regex is used)'
   )
+  .option(
+    '-w, --with <libraries> ',
+    'Additional modules to include in regex'
+  )
   .action((path: string, cmd: any) => {
     const config: IModuleCheckerConfig = {
       checkAllNodeModules: cmd.all === true,
@@ -45,7 +49,8 @@ program
 
     if (cmd.regex) {
       console.log('\n\nBabel-loader exclude regex:')
-      console.log(getBabelLoaderIgnoreRegex(es6Modules))
+      const extraModules = cmd.with ? cmd.with.split(',') : []
+      console.log(getBabelLoaderIgnoreRegex(es6Modules, extraModules))
     }
 
     if (es6Modules.length !== 0) {
